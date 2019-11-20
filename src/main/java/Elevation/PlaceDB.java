@@ -8,7 +8,7 @@ public class PlaceDB {
     private static final String DB_CONNECTION_URL = "jdbc:sqlite:places.sqlite";
 
     private static final String NAME_COL = "name";
-    private static final String ELEV_COL = "elevation";
+    private static final String ELEV_COL = "elev";
 
     static final String OK = "ok";
     static final String DUPLICATE = "Duplicate place name";
@@ -33,7 +33,7 @@ public class PlaceDB {
         List<Place> allRecords = new ArrayList<>();
 
         try(Connection conn = DriverManager.getConnection(DB_CONNECTION_URL);
-        Statement statement = conn.createStatement()){
+            Statement statement = conn.createStatement()){
 
             String selectAllSQL = "SELECT * FROM places";
             ResultSet rsAll = statement.executeQuery(selectAllSQL);
@@ -57,13 +57,14 @@ public class PlaceDB {
     }
     public String addRecord(Place place){
 
-        String addPlace = "INSERT INTO places VALUE(?,?)";
+        String addPlaceSQL = "INSERT INTO places VALUE( ? , ? )";
 
         try(Connection conn = DriverManager.getConnection(DB_CONNECTION_URL);
-        PreparedStatement addPlacePs = conn.prepareStatement(addPlace)){
+        PreparedStatement addPlacePs = conn.prepareStatement(addPlaceSQL)){
 
             addPlacePs.setString(1,place.getName());
             addPlacePs.setDouble(2, place.getElevation());
+            addPlacePs.execute();
 
             return OK;
 

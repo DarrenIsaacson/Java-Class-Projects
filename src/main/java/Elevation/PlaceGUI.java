@@ -49,8 +49,9 @@ public class PlaceGUI extends JFrame {
 
                 try{
                     elev = Double.parseDouble(elevationText.getText());
-                }catch (NumberFormatException nfe){
+                } catch (NumberFormatException nfe){
                     errorDialog("Enter a number for elevation");
+                    return;
                 }
 
                 Place placeRecord = new Place(place, elev);
