@@ -9,4 +9,24 @@ public class Place {
         elevation = e;
         
     }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getElevation() {
+        return elevation;
+    }
+
+    public void setElevation(double elevation) {
+        this.elevation = elevation;
+    }
+
+    @Override
+    public String toString() {
+        return "Place: " + name + " is a elevation " + elevation + " meters.";
+    }
 }
